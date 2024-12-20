@@ -12,7 +12,7 @@ const scraping = async () => {
     visible: true,
   });
 
-  const firstChildSelector = `.poster__title`;
+  const firstChildSelector = ` .poster__title`;
   await page.waitForSelector(firstChildSelector, { visible: true });
 
   const firstTitle = await page.$$(firstChildSelector);
@@ -32,19 +32,9 @@ const scraping = async () => {
   await page.waitForSelector(classButtonDowload, { visible: true });
   await page.click(classButtonDowload);
 
-  // Agora, vamos pegar o primeiro link dentro de .link-container
   const linkSelector = ".link-container > a";
-
-  // Espera o link dentro de .link-container ser visível
   await page.waitForSelector(linkSelector, { visible: true });
-
-  // Captura o primeiro link dentro de .link-container e clica nele
-  const link = await page.$(linkSelector);
-  if (link) {
-    await link.click();
-  } else {
-    console.log("Nenhum link encontrado dentro de .link-container.");
-  }
+  await page.click(linkSelector);
 };
 
 scraping();
